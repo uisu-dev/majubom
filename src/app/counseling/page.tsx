@@ -55,7 +55,7 @@ export default function CounselingPage() {
       .join(", ");
     const win = window.open("", "_blank");
     if (!win) return;
-    win.document.write(`<html><body style="padding:50px;border:5px double black;font-family:sans-serif;">
+    win.document.write(`<html><body style="padding:50px;border:5px double black;font-family:'Pretendard Variable',sans-serif;">
       <h1 style="text-align:center;text-decoration:underline;">회복을 위한 약속</h1>
       <p>지도교사: ${teacher}</p>
       <p>학생: ${studentNames}</p><hr>
@@ -70,26 +70,29 @@ export default function CounselingPage() {
     win.document.close();
   };
 
+  const inputClass = "w-full px-3 py-2.5 border border-border rounded-[8px] text-[14px] bg-surface-card text-text-primary placeholder:text-text-disabled min-h-[44px]";
+  const textareaClass = "w-full px-3 py-3 border border-border rounded-[8px] text-[14px] bg-surface-card text-text-primary placeholder:text-text-disabled min-h-[100px] leading-relaxed";
+
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-bold text-blue-600 mb-6 pb-3 border-b-2 border-blue-50">
+    <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
+      <div className="bg-surface-card rounded-[12px] shadow-card p-6">
+        <h2 className="text-[18px] font-bold text-text-primary mb-6 pb-3 border-b border-border">
           마주봄 - 상담 일지 작성
         </h2>
 
         <div className="mb-5">
-          <label className="block font-bold text-blue-600 mb-2 text-sm">상담교사</label>
+          <label className="block text-[13px] font-semibold text-text-secondary mb-2">상담교사</label>
           <input
             type="text"
             value={teacher}
             onChange={(e) => setTeacher(e.target.value)}
             placeholder="선생님 성함 입력"
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm"
+            className={inputClass}
           />
         </div>
 
         <div className="mb-5">
-          <label className="block font-bold text-blue-600 mb-2 text-sm">학생 선택</label>
+          <label className="block text-[13px] font-semibold text-text-secondary mb-2">학생 선택</label>
           <StudentSelector
             selected={selectedStudents}
             onSelect={setSelectedStudents}
@@ -97,11 +100,11 @@ export default function CounselingPage() {
         </div>
 
         <div className="mb-5">
-          <label className="block font-bold text-blue-600 mb-2 text-sm">상담 모드</label>
+          <label className="block text-[13px] font-semibold text-text-secondary mb-2">상담 모드</label>
           <select
             value={mode}
             onChange={(e) => setMode(e.target.value)}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm"
+            className={inputClass}
           >
             <option value="일반">일반 상담</option>
             <option value="회복적">회복적 상담</option>
@@ -109,74 +112,54 @@ export default function CounselingPage() {
         </div>
 
         <div className="mb-5">
-          <p className="text-xs text-gray-400 italic mb-1">
+          <p className="text-[12px] text-text-disabled italic mb-1">
             {isRestorative
               ? "힌트: 이번 상황에서 어떤 일이 있었는지 이야기해볼까요?"
               : "상담 내용을 자유롭게 입력하세요."}
           </p>
-          <label className="block font-bold text-blue-600 mb-2 text-sm">
+          <label className="block text-[13px] font-semibold text-text-secondary mb-2">
             {isRestorative ? "1. 사건 요약" : "상담 내용"}
           </label>
-          <textarea
-            value={c1}
-            onChange={(e) => setC1(e.target.value)}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm min-h-[100px]"
-          />
+          <textarea value={c1} onChange={(e) => setC1(e.target.value)} className={textareaClass} />
         </div>
 
         {isRestorative && (
           <>
             <div className="mb-5">
-              <p className="text-xs text-gray-400 italic mb-1">
+              <p className="text-[12px] text-text-disabled italic mb-1">
                 힌트: 그 일이 당신과 다른 사람에게 어떤 영향을 주었나요? 지금 감정은?
               </p>
-              <label className="block font-bold text-blue-600 mb-2 text-sm">
+              <label className="block text-[13px] font-semibold text-text-secondary mb-2">
                 2. 관련된 사람들의 감정과 생각
               </label>
-              <textarea
-                value={c2}
-                onChange={(e) => setC2(e.target.value)}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm min-h-[100px]"
-              />
+              <textarea value={c2} onChange={(e) => setC2(e.target.value)} className={textareaClass} />
             </div>
             <div className="mb-5">
-              <p className="text-xs text-gray-400 italic mb-1">
+              <p className="text-[12px] text-text-disabled italic mb-1">
                 힌트: 앞으로 이 관계를 어떻게 회복하고 싶나요?
               </p>
-              <label className="block font-bold text-blue-600 mb-2 text-sm">
+              <label className="block text-[13px] font-semibold text-text-secondary mb-2">
                 3. 피해 회복 및 관계 회복 방안 논의
               </label>
-              <textarea
-                value={c3}
-                onChange={(e) => setC3(e.target.value)}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm min-h-[100px]"
-              />
+              <textarea value={c3} onChange={(e) => setC3(e.target.value)} className={textareaClass} />
             </div>
             <div className="mb-5">
-              <p className="text-xs text-gray-400 italic mb-1">
+              <p className="text-[12px] text-text-disabled italic mb-1">
                 힌트: 그 회복을 위해 어떤 약속을 할 수 있나요?
               </p>
-              <label className="block font-bold text-blue-600 mb-2 text-sm">
+              <label className="block text-[13px] font-semibold text-text-secondary mb-2">
                 4. 합의 내용 및 실천 약속
               </label>
-              <textarea
-                value={c4}
-                onChange={(e) => setC4(e.target.value)}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm min-h-[100px]"
-              />
+              <textarea value={c4} onChange={(e) => setC4(e.target.value)} className={textareaClass} />
             </div>
             <div className="mb-5">
-              <p className="text-xs text-gray-400 italic mb-1">
+              <p className="text-[12px] text-text-disabled italic mb-1">
                 힌트: 상담자 종합 의견 및 향후 지도 계획
               </p>
-              <label className="block font-bold text-blue-600 mb-2 text-sm">
+              <label className="block text-[13px] font-semibold text-text-secondary mb-2">
                 5. 상담자 의견 및 지도 계획
               </label>
-              <textarea
-                value={c5}
-                onChange={(e) => setC5(e.target.value)}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm min-h-[100px]"
-              />
+              <textarea value={c5} onChange={(e) => setC5(e.target.value)} className={textareaClass} />
             </div>
           </>
         )}
@@ -184,7 +167,7 @@ export default function CounselingPage() {
         <button
           onClick={handleSubmit}
           disabled={saving}
-          className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold hover:bg-blue-700 transition disabled:opacity-50"
+          className="w-full bg-brand text-white py-3.5 rounded-[8px] text-[14px] font-bold hover:bg-brand-hover transition disabled:opacity-50 min-h-[44px]"
         >
           {saving ? "저장 중..." : "상담 일지 저장하기"}
         </button>
@@ -192,7 +175,7 @@ export default function CounselingPage() {
         {isRestorative && (
           <button
             onClick={printPledge}
-            className="w-full bg-green-600 text-white py-3 rounded-lg font-bold mt-3 hover:bg-green-700 transition"
+            className="w-full bg-success text-white py-3 rounded-[8px] text-[14px] font-bold mt-3 hover:opacity-90 transition min-h-[44px]"
           >
             회복을 위한 서약서 출력
           </button>

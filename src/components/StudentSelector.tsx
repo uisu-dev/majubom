@@ -55,7 +55,7 @@ export default function StudentSelector({ multiple = true, selected, onSelect }:
         <select
           value={grade}
           onChange={(e) => setGrade(e.target.value)}
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+          className="flex-1 px-3 py-2.5 border border-border rounded-[8px] text-[14px] bg-surface-card text-text-primary min-h-[44px]"
         >
           <option value="">학년</option>
           <option value="1">1학년</option>
@@ -65,7 +65,7 @@ export default function StudentSelector({ multiple = true, selected, onSelect }:
         <select
           value={cls}
           onChange={(e) => setCls(e.target.value)}
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+          className="flex-1 px-3 py-2.5 border border-border rounded-[8px] text-[14px] bg-surface-card text-text-primary min-h-[44px]"
         >
           <option value="">반</option>
           {Array.from({ length: 15 }, (_, i) => (
@@ -79,13 +79,13 @@ export default function StudentSelector({ multiple = true, selected, onSelect }:
           placeholder="이름 검색"
           value={nameSearch}
           onChange={(e) => setNameSearch(e.target.value)}
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+          className="flex-1 px-3 py-2.5 border border-border rounded-[8px] text-[14px] bg-surface-card text-text-primary placeholder:text-text-disabled min-h-[44px]"
         />
       </div>
 
-      <div className="h-48 overflow-y-auto border border-gray-300 rounded-lg bg-white">
+      <div className="h-48 overflow-y-auto border border-border rounded-[8px] bg-surface-card">
         {filtered.length === 0 ? (
-          <div className="text-gray-400 text-center mt-16 text-sm">
+          <div className="text-text-disabled text-center mt-16 text-[13px]">
             학년/반을 선택하거나 이름을 검색하세요.
           </div>
         ) : (
@@ -94,18 +94,18 @@ export default function StudentSelector({ multiple = true, selected, onSelect }:
             return (
               <label
                 key={s.id}
-                className="flex items-center px-4 py-2 border-b border-gray-100 cursor-pointer hover:bg-blue-50"
+                className="flex items-center px-4 py-2.5 border-b border-border cursor-pointer hover:bg-surface-subtle min-h-[44px]"
               >
                 <input
                   type={multiple ? "checkbox" : "radio"}
                   checked={isChecked}
                   onChange={() => toggleStudent(s)}
-                  className="w-4 h-4 mr-4 shrink-0"
+                  className="w-4 h-4 mr-4 shrink-0 accent-[var(--brand)]"
                 />
-                <span className="w-24 text-sm font-medium text-gray-500 shrink-0">
+                <span className="w-24 text-[13px] font-medium text-text-tertiary shrink-0">
                   {s.grade}-{s.class} {s.number}번
                 </span>
-                <span className="text-sm text-gray-900">{s.name}</span>
+                <span className="text-[14px] text-text-primary">{s.name}</span>
               </label>
             );
           })
@@ -117,12 +117,12 @@ export default function StudentSelector({ multiple = true, selected, onSelect }:
           {selected.map((s) => (
             <span
               key={s.id}
-              className="inline-flex items-center gap-1 bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full"
+              className="inline-flex items-center gap-1 bg-brand-tint text-brand text-[11px] font-medium px-2.5 py-1 rounded-full"
             >
               {s.grade}-{s.class} {s.name}
               <button
                 onClick={() => onSelect(selected.filter((x) => x.id !== s.id))}
-                className="hover:text-blue-900"
+                className="hover:opacity-70 ml-0.5"
               >
                 &times;
               </button>

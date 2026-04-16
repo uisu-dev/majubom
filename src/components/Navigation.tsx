@@ -15,12 +15,12 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-blue-600 text-white shadow-md">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="flex items-center h-14 gap-1 overflow-x-auto">
+    <nav className="bg-surface-card border-b border-border sticky top-0 z-50">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="flex items-center h-[52px] gap-1 overflow-x-auto">
           <Link
             href="/"
-            className="font-bold text-lg mr-4 shrink-0 hover:opacity-90"
+            className="text-[18px] font-bold text-brand mr-6 shrink-0 hover:opacity-80 transition-opacity"
           >
             마주봄
           </Link>
@@ -28,10 +28,10 @@ export default function Navigation() {
             <Link
               key={item.href}
               href={item.href}
-              className={`px-3 py-2 rounded-md text-sm font-medium shrink-0 transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-[13px] font-medium shrink-0 transition-colors min-h-[44px] flex items-center ${
                 pathname === item.href
-                  ? "bg-blue-700 text-white"
-                  : "text-blue-100 hover:bg-blue-500"
+                  ? "bg-brand-tint text-brand"
+                  : "text-text-tertiary hover:bg-surface-subtle hover:text-text-secondary"
               }`}
             >
               {item.label}

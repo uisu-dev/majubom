@@ -33,10 +33,7 @@ export default function ReflectionUploadPage() {
       if (result.success) {
         setFile(null);
         setSelectedStudents([]);
-        // Reset file input
-        const fileInput = document.querySelector(
-          'input[type="file"]'
-        ) as HTMLInputElement;
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
         if (fileInput) fileInput.value = "";
       }
     } catch {
@@ -46,14 +43,14 @@ export default function ReflectionUploadPage() {
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-bold text-blue-600 mb-6 pb-3 border-b-2 border-blue-50">
+    <div className="max-w-xl mx-auto px-6 py-8 space-y-6">
+      <div className="bg-surface-card rounded-[12px] shadow-card p-6">
+        <h2 className="text-[18px] font-bold text-text-primary mb-6 pb-3 border-b border-border">
           성찰문 등록
         </h2>
 
         <div className="mb-5">
-          <label className="block font-bold text-blue-600 mb-2 text-sm">
+          <label className="block text-[13px] font-semibold text-text-secondary mb-2">
             1. 학생 선택
           </label>
           <StudentSelector
@@ -64,15 +61,15 @@ export default function ReflectionUploadPage() {
         </div>
 
         <div className="mb-5">
-          <label className="block font-bold text-blue-600 mb-2 text-sm">
+          <label className="block text-[13px] font-semibold text-text-secondary mb-2">
             2. 성찰문 파일
           </label>
           <input
             type="file"
             onChange={(e) => setFile(e.target.files?.[0] || null)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white"
+            className="w-full px-3 py-2.5 border border-border rounded-[8px] text-[14px] bg-surface-card text-text-primary min-h-[44px]"
           />
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-[12px] text-text-disabled mt-1">
             * 파일명은 원본 그대로 저장됩니다.
           </p>
         </div>
@@ -80,17 +77,17 @@ export default function ReflectionUploadPage() {
         <button
           onClick={handleUpload}
           disabled={uploading}
-          className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold hover:bg-blue-700 transition disabled:opacity-50"
+          className="w-full bg-brand text-white py-3.5 rounded-[8px] text-[14px] font-bold hover:bg-brand-hover transition disabled:opacity-50 min-h-[44px]"
         >
           {uploading ? "업로드 중..." : "등록하기"}
         </button>
 
         {message && (
           <div
-            className={`mt-4 p-3 rounded-lg text-center font-bold text-sm ${
+            className={`mt-4 p-3 rounded-[8px] text-center text-[13px] font-bold ${
               message.includes("완료")
-                ? "bg-green-50 text-green-700"
-                : "bg-red-50 text-red-700"
+                ? "bg-success-tint text-success"
+                : "bg-destructive-tint text-destructive"
             }`}
           >
             {message}
