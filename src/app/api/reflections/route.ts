@@ -15,11 +15,17 @@ export async function POST(request: NextRequest) {
   }
 
   const timestamp = Date.now();
-  const filePath = `reflections/${studentId}/${timestamp}_${file.name}`;
+  // Supabase Storage 키는 한글·공백·특수문자 불가 → 확장자만 보존하고 안전한 키로 저장
+  const dotIdx = file.name.lastIndexOf(".");
+  const ext = dotIdx >= 0 ? file.name.slice(dotIdx).replace(/[^a-zA-Z0-9.]/g, "") : "";
+  const safeName = `${timestamp}${ext}`;
+  const filePath = `reflections/${studentId}/${safeName}`;
 
   const { error: uploadError } = await supabase.storage
     .from("reflections")
-    .upload(filePath, file);
+    .upload(filePath, file, {
+      contentType: file.type || "application/octet-stream",
+    });
 
   if (uploadError) {
     return NextResponse.json(
